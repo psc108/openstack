@@ -199,6 +199,13 @@ class ChatView(MistralAIView):
             if not api_key:
                 return JsonResponse({'error': 'Mistral AI API key is required'}, status=400)
             
+            # Enhance the message to encourage tool usage over instructions
+            action_words = ['create', 'launch', 'build', 'deploy', 'delete', 'remove', 'start', 'stop', 'configure', 'setup']
+            if any(word in user_message.lower() for word in action_words):
+                enhanced_message = f"Execute this action immediately using your tools: {user_message}"
+            else:
+                enhanced_message = user_message
+            
             # Set API key for this request
             import os
             os.environ['MISTRAL_API_KEY'] = api_key
@@ -207,7 +214,7 @@ class ChatView(MistralAIView):
             agent = MistralOpenStackAgent(dry_run=dry_run)
             
             # Process the request
-            response = agent.process_request(user_message)
+            response = agent.process_request(enhanced_message)
             
             return JsonResponse({
                 'response': response,

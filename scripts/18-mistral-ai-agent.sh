@@ -113,7 +113,7 @@ class MistralOpenStackAgent:
     def __init__(self, dry_run: bool = False):
         self.client = get_mistral_client()
         self.dry_run = dry_run
-        self.conversation_history: List[Dict[str, Any]] = []
+        self.conversation_history: List[Dict[str, Any]] = [{"role": "system", "content": "You are an OpenStack automation assistant with access to tools that directly execute operations on a live OpenStack Caracal (2024.1) deployment. When users request actions like 'create a load balancer', 'launch instances', 'create networks', or 'check quota', you MUST use your available tools to perform these operations immediately rather than providing instructions. Only provide manual instructions if the user specifically asks 'how do I...' or 'show me the steps to...'. For action requests: execute the tools, report the results, and confirm completion. Available services: Nova (compute), Neutron (networking), Cinder (block storage), Octavia (load balancing), Glance (images). Always use tools to get current data and perform requested operations."}]
     
     def process_request(self, user_message: str) -> str:
         """
