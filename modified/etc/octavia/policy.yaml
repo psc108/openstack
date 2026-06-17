@@ -1,0 +1,58 @@
+# Octavia API Policy Configuration
+# This file defines access control rules for Octavia load balancer operations
+
+# Default rule for admin-only operations
+"admin_only": "role:admin"
+
+# Default rule for admin or owner access  
+"admin_or_owner": "rule:admin_only or project_id:%(project_id)s"
+
+# Load Balancer operations
+"load-balancer:read": "rule:admin_or_owner"
+"load-balancer:read-global": "rule:admin_only"  
+"load-balancer:write": "rule:admin_or_owner"
+"load-balancer:delete": "rule:admin_or_owner"
+
+# Listener operations
+"load-balancer:listener:read": "rule:admin_or_owner"
+"load-balancer:listener:write": "rule:admin_or_owner"
+"load-balancer:listener:delete": "rule:admin_or_owner"
+
+# Pool operations
+"load-balancer:pool:read": "rule:admin_or_owner"
+"load-balancer:pool:write": "rule:admin_or_owner"
+"load-balancer:pool:delete": "rule:admin_or_owner"
+
+# Member operations
+"load-balancer:member:read": "rule:admin_or_owner"
+"load-balancer:member:write": "rule:admin_or_owner"
+"load-balancer:member:delete": "rule:admin_or_owner"
+
+# Health Monitor operations
+"load-balancer:health_monitor:read": "rule:admin_or_owner"
+"load-balancer:health_monitor:write": "rule:admin_or_owner"
+"load-balancer:health_monitor:delete": "rule:admin_or_owner"
+
+# L7 Policy operations
+"load-balancer:l7policy:read": "rule:admin_or_owner"
+"load-balancer:l7policy:write": "rule:admin_or_owner"
+"load-balancer:l7policy:delete": "rule:admin_or_owner"
+
+# L7 Rule operations  
+"load-balancer:l7rule:read": "rule:admin_or_owner"
+"load-balancer:l7rule:write": "rule:admin_or_owner"
+"load-balancer:l7rule:delete": "rule:admin_or_owner"
+
+# Amphora operations (admin only for infrastructure management)
+"load-balancer:amphora:read": "rule:admin_only"
+"load-balancer:amphora:write": "rule:admin_only"
+"load-balancer:amphora:delete": "rule:admin_only"
+
+# Provider operations (read-only for all users)
+"load-balancer:provider:read": ""
+"load-balancer:provider:list": ""
+
+# Quota operations (admin only)
+"load-balancer:quota:read": "rule:admin_only"  
+"load-balancer:quota:write": "rule:admin_only"
+"load-balancer:quota:delete": "rule:admin_only"
