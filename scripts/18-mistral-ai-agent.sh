@@ -138,7 +138,7 @@ class MistralOpenStackAgent:
                     model="mistral-large-latest",
                     messages=self.conversation_history,
                     tools=TOOLS,
-                    tool_choice="auto",
+                    tool_choice="any",
                     temperature=0.1,
                 )
                 
