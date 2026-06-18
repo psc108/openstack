@@ -334,6 +334,9 @@ user_domain_name = Default
 project_name = service
 username = octavia
 password = $OCTAVIA_PASS
+
+[oslo_policy]
+policy_file = /etc/octavia/policy.yaml
 EOF
 
 # Create policy file for dashboard access (THE KEY FIX)
