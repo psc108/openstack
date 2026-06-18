@@ -336,40 +336,6 @@ username = octavia
 password = $OCTAVIA_PASS
 EOF
 
-# Create policy file for dashboard access (THE KEY FIX)
-cat > /etc/octavia/policy.yaml <<EOF
-# Load balancer operations
-"load-balancer:read": "rule:admin_or_owner"
-"load-balancer:read-global": "rule:admin_only"
-"load-balancer:write": "rule:admin_or_owner"
-"load-balancer:read-quota": "rule:admin_or_owner"
-"load-balancer:read-quota-global": "rule:admin_only"
-"load-balancer:write-quota": "rule:admin_only"
-
-# Listener operations
-"listener:read": "rule:admin_or_owner"
-"listener:write": "rule:admin_or_owner"
-
-# Pool operations
-"pool:read": "rule:admin_or_owner"
-"pool:write": "rule:admin_or_owner"
-
-# Member operations
-"member:read": "rule:admin_or_owner"
-"member:write": "rule:admin_or_owner"
-
-# Health monitor operations
-"healthmonitor:read": "rule:admin_or_owner"
-"healthmonitor:write": "rule:admin_or_owner"
-
-# Quota operations
-"quota:read": "rule:admin_or_owner"
-"quota:write": "rule:admin_only"
-
-# Provider operations
-"provider:read": "rule:admin_or_owner"
-EOF
-
 # Set ownership and permissions
 chown octavia:octavia /etc/octavia/octavia.conf
 chmod 640 /etc/octavia/octavia.conf
